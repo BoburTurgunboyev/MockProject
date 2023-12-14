@@ -1,9 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using MockProject.DataAccess;
+using MockProject.Repositories;
+using MockProject.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<IUserRepository,UserRepository>();
+builder.Services.AddScoped<IUserService,UserService>();
 builder.Services.AddDbContext<AppDbConntext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Connected")));
 
 builder.Services.AddControllers();
